@@ -1,0 +1,17 @@
+[project]
+name = "schoolx-1"
+version = "0.1.0"
+description = "API для управления задач"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "alembic>=1.18.3",
+  "asyncpg>=0.31.0",
+  "cryptography>=46.0.4",
+  "fastapi[standard]>=0.128.0",
+  "sqlalchemy>=2.0.46",
+  "starlette-exporter>=0.23.0",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.15.0"]
