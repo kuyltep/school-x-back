@@ -1,5 +1,5 @@
 from typing import Any, List, Tuple, Literal
-from sqlalchemy import select, update, asc, desc, and_, func, Select
+from sqlalchemy import select, update, asc, desc, func, Select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database.database import async_session_maker

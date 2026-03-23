@@ -11,6 +11,7 @@ from ..sql_enums import TaskStatus
 
 if TYPE_CHECKING:
   from .user import User
+  from .comment import Comment
 
 class Task(Base):
   title: Mapped[str]
@@ -21,3 +22,6 @@ class Task(Base):
   user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
 
   user: Mapped["User"] = relationship("User", back_populates="tasks")
+  comments: Mapped[list["Comment"]] = relationship(
+    "Comment", back_populates="task", cascade="all, delete-orphan"
+  )

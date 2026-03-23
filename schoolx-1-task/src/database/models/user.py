@@ -6,6 +6,7 @@ from src.database.database import Base
 
 if TYPE_CHECKING:
   from .task import Task
+  from .comment import Comment
 
 
 class User(Base):
@@ -15,3 +16,6 @@ class User(Base):
   birthdate: Mapped[datetime] = mapped_column(nullable=True)
 
   tasks: Mapped[list["Task"]] = relationship("Task", back_populates="user")
+  comments: Mapped[list["Comment"]] = relationship(
+    "Comment", back_populates="user", cascade="all, delete-orphan"
+  )
