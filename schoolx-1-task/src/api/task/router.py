@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends, Query
+from fastapi import APIRouter, status, Depends, Query, status
 from typing import Annotated
 
 from src.api.pagination import PaginatedResponse
@@ -9,9 +9,7 @@ from .response import TaskResponse
 from .service import TaskService
 from .exceptions import TASK_NOT_FOUND_EXCEPTION
 
-router = APIRouter(
-  prefix="/tasks", tags=["Tasks"]
-)
+router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
 @router.get("")
@@ -37,7 +35,7 @@ async def get_task(id: str) -> TaskResponse:
   return task
 
 
-@router.post("")
+@router.post("", status_code=status.HTTP_201_CREATED)
 async def create_task(
   data: TaskCreate,
   current_user: User = Depends(get_current_user),

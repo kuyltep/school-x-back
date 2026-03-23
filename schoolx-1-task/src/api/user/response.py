@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict
 
+
 class UserResponse(BaseModel):
   id: UUID
   username: str
@@ -10,4 +11,4 @@ class UserResponse(BaseModel):
   created_at: datetime
   updated_at: datetime
 
-  model_config = ConfigDict(from_attributes=True, extra='ignore')
+  model_config = ConfigDict(from_attributes=True, extra="ignore")

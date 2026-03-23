@@ -11,7 +11,6 @@ class TaskCreate(BaseModel):
   asset_id: UUID | None = None
   version: int | None = Field(default=None, ge=1, le=255)
   status: TaskStatus | None = None
-  
 
 
 class TaskUpdate(TaskCreate):
@@ -20,4 +19,3 @@ class TaskUpdate(TaskCreate):
 
 class TaskPaginationParams(PaginationParams):
   sort_by: Literal["title", "status", "created_at", "updated_at"] = "created_at"
-

@@ -34,7 +34,7 @@ class TaskService:
 
   @staticmethod
   async def get_tasks(
-    pagination: TaskPaginationParams
+    pagination: TaskPaginationParams,
   ) -> PaginatedResponse[TaskResponse]:
     items, total = await TaskRepository.get_by_filters(
       page=pagination.page,

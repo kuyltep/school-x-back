@@ -3,6 +3,7 @@ from src.database.database import async_session_maker
 from src.database.repositories.base import BaseRepository
 from src.database.models.user import User
 
+
 class UserRepository(BaseRepository):
   model = User
 

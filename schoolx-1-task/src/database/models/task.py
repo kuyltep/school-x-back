@@ -13,6 +13,7 @@ if TYPE_CHECKING:
   from .user import User
   from .comment import Comment
 
+
 class Task(Base):
   title: Mapped[str]
   status: Mapped[TaskStatus] = mapped_column(default=TaskStatus.PENDING)

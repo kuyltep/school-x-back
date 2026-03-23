@@ -3,13 +3,14 @@ from src.api.user.schema import UserCreate, UserUpdate
 from src.api.user.response import UserResponse
 from src.api.auth.security import get_password_hash
 
+
 class UserService:
   @staticmethod
   async def create_user(data: UserCreate) -> UserResponse:
     user_data = data.model_dump()
     password = user_data.pop("password")
     user_data["password_hash"] = get_password_hash(password)
-    
+
     user = await UserRepository.create(**user_data)
     return UserResponse.model_validate(user)
 

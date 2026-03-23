@@ -15,7 +15,9 @@ class Comment(Base):
   task_id: Mapped[UUID] = mapped_column(ForeignKey("tasks.id"), index=True)
   content: Mapped[str] = mapped_column(nullable=False)
 
-  parent_id: Mapped[UUID | None] = mapped_column(ForeignKey("comments.id"), nullable=True)
+  parent_id: Mapped[UUID | None] = mapped_column(
+    ForeignKey("comments.id"), nullable=True
+  )
   parent: Mapped["Comment | None"] = relationship(
     "Comment", remote_side="Comment.id", back_populates="replies"
   )

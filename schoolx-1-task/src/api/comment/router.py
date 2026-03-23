@@ -1,7 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, status
 
 from src.api.auth.dependencies import get_current_user
 from src.api.comment.exceptions import COMMENT_NOT_FOUND_EXCEPTION
@@ -27,7 +27,7 @@ async def get_comments(
   return await CommentService.get_comments(task_id, pagination)
 
 
-@router.post("")
+@router.post("", status_code=status.HTTP_201_CREATED)
 async def create_comment(
   task_id: UUID,
   data: CommentCreate,

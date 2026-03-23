@@ -68,7 +68,6 @@ class BaseRepository:
       items = result.scalars().all()
       return items, total
 
-
   @classmethod
   async def _get_total_count(cls, session: AsyncSession, query: Select) -> int:
 
