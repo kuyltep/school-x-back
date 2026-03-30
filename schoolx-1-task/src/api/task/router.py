@@ -1,13 +1,15 @@
-from fastapi import APIRouter, status, Depends, Query, status
 from typing import Annotated
 
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
+
+from src.api.auth.dependencies import get_current_user
 from src.api.pagination import PaginatedResponse
 from src.database.models.user import User
-from src.api.auth.dependencies import get_current_user
-from .schema import TaskCreate, TaskUpdate, TaskPaginationParams
-from .response import TaskResponse
-from .service import TaskService
+
 from .exceptions import TASK_NOT_FOUND_EXCEPTION
+from .response import TaskAvatarUploadResponse, TaskResponse
+from .schema import TaskCreate, TaskPaginationParams, TaskUpdate
+from .service import TaskService
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
@@ -41,6 +43,17 @@ async def create_task(
   current_user: User = Depends(get_current_user),
 ) -> TaskResponse:
   return await TaskService.create_task(data, current_user.id)
+
+
+@router.post("/{id}/upload-avatar")
+async def upload_task_avatar(
+  id: str,
+  file: UploadFile = File(...),
+) -> TaskAvatarUploadResponse:
+  result = await TaskService.upload_avatar(id, file)
+  if not result:
+    raise TASK_NOT_FOUND_EXCEPTION
+  return result
 
 
 @router.patch("/{id}")
