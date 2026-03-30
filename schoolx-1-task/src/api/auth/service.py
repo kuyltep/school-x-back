@@ -55,16 +55,16 @@ class AuthService:
     return TokenResponse(access_token=access_token)
 
   @staticmethod
-  def refresh(response: Response, user: User) -> TokenResponse:
+  async def refresh(response: Response, user: User) -> TokenResponse:
     access_token = create_access_token(data={"sub": str(user.id)})
     set_access_cookie(response, access_token)
     return TokenResponse(access_token=access_token)
 
   @staticmethod
-  def logout(response: Response) -> MessageResponse:
+  async def logout(response: Response) -> MessageResponse:
     clear_access_cookie(response)
     return MessageResponse(detail="Logged out successfully")
 
   @staticmethod
-  def me(user: User) -> UserResponse:
+  async def me(user: User) -> UserResponse:
     return UserResponse.model_validate(user)
