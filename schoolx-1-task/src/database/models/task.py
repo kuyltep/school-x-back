@@ -19,6 +19,7 @@ class Task(Base):
   status: Mapped[TaskStatus] = mapped_column(default=TaskStatus.PENDING)
   description: Mapped[str | None]
   asset_id: Mapped[UUID | None] = mapped_column(Uuid, index=True)
+  avatar_url: Mapped[str | None]
   version: Mapped[int] = mapped_column(default=1)
   user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
 
